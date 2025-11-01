@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4627d698f3fba4c81ddfece5542ccd, type: 3}
+  m_Name: Saiber1St
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySCO
+  charaname: Saber
+  normalImage: {fileID: -3349259736061779126, guid: 59855d5138f678a41a12266ab5f48ec4, type: 3}
+  attackImage: {fileID: 8490449775077930944, guid: f1b458a025de95c4e998fbf301acf408, type: 3}
+  attackImage2: {fileID: 0}
+  downImage: {fileID: 0}
+  doFloat: 0
+  fullHP: 10
+  walkSpeed: 2
+  target: {fileID: 0}
+  targetTagName: Enemy
+  attackRange: 0
+  attackSpeed: 1
+  attackPoint: 3
+  moveStopDistance: 0.1
