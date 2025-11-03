@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CharactorManager : MonoBehaviour
 {
@@ -10,16 +11,16 @@ public class CharactorManager : MonoBehaviour
     protected GameObject targetOb;
     protected Vector3 startPos;
     protected string MotionInstructions;
-    [SerializeField] protected float attackPoint;
-    [SerializeField] protected float MoveSpeed;
-    [SerializeField] protected float attackInterval = 2f;
-    [SerializeField] protected Sprite attackImage;
-    [SerializeField] protected Sprite normalImage;
+    protected float attackPoint;
+    protected float MoveSpeed;
+    protected float attackInterval = 2f;
+     protected Sprite attackImage;
+     protected Sprite normalImage;
     protected float lastAttackTime = 0f;
     [SerializeField] protected GameObject HPPrefab;
     protected GameObject HPInstance;
     protected Canvas canvas;
-    [SerializeField] protected Vector3 hpOffset;
+    protected Vector3 hpOffset;
     protected float myHP = 0;
     [SerializeField]protected EnemySCO sco;
     protected string targetTag;
@@ -33,6 +34,12 @@ public class CharactorManager : MonoBehaviour
 
     private void PlayHPPrefab()
     {
+        if (HPPrefab == null)
+        {
+            Debug.LogError($"{name}: HPPrefab が設定されていません。Inspectorで割り当ててください。");
+            return;
+        }
+
         HPInstance = Instantiate(HPPrefab, new Vector3(transform.position.x, transform.position.y), Quaternion.identity);
         if (canvas == null) Debug.Log("canvas_is_null");
         HPInstance.transform.SetParent(canvas.transform, false);
@@ -85,12 +92,18 @@ public class CharactorManager : MonoBehaviour
             return;
         }
 
-        if (sco.doFloat) motionDictionaryn?.FloatMotion(startPos, gameObject, 0.5f, 1);
-        if (MotionInstructions == "Invasion") 
+        if (sco.doFloat)
         {
-            
+            motionDictionaryn?.FloatMotion(startPos, gameObject, 0.5f, 1);
+        }
+        if (MotionInstructions == "Invasion")
+        {
+            if(targetOb == null)
+            {
+                return;
+            }
             motionDictionaryn?.InvasionMotion(gameObject, targetOb, MoveSpeed);
-
+            
         }
         else
         {
@@ -134,11 +147,20 @@ public class CharactorManager : MonoBehaviour
     //==========================================
 
     public void ImageChenge(int imagenum)
-    {
-        SpriteRenderer imageRenderer = gameObject.GetComponent<SpriteRenderer>();
-        if (imagenum == 0) imageRenderer.sprite = normalImage;
-        if (imagenum == 1) imageRenderer.sprite = attackImage;
-    }
+{
+    // --- 安全チェック ---
+    
+    if (gameObject == null) return;
+
+    SpriteRenderer imageRenderer = GetComponent<SpriteRenderer>();
+    if (imageRenderer == null) return; 
+
+    // --- スプライト切替 ---
+    if (imagenum == 0 && normalImage != null)
+        imageRenderer.sprite = normalImage;
+    else if (imagenum == 1 && attackImage != null)
+        imageRenderer.sprite = attackImage;
+}
 
     #region 攻撃処理
 
@@ -165,25 +187,29 @@ public class CharactorManager : MonoBehaviour
     Coroutine attackCoroutine;  // 現在動いている攻撃コルーチンを保持
 
     protected IEnumerator AttackLoop()
+{
+    attacking = true;
+
+    while (attacking && toAttack != null)
     {
-        attacking = true;
-
-        while (attacking && toAttack != null)
+        // 攻撃クールタイムチェック
+        if (Time.time - lastAttackTime >= attackInterval)
         {
-            // 攻撃クールタイムチェック
-            if (Time.time - lastAttackTime >= attackInterval)
-            {
-                lastAttackTime = Time.time;
-                motionDictionaryn.AttackMotion(gameObject, attackInterval);
-                DoDamage(toAttack);
-            }
+            lastAttackTime = Time.time;
 
-            yield return null; // 毎フレームチェック（攻撃間隔を保つ）
+            // 攻撃モーション再生（毎回呼ぶ）
+            motionDictionaryn.AttackMotion(gameObject, attackInterval * 0.5f);
+
+            // ダメージ適用
+            DoDamage(toAttack);
         }
 
-        attackCoroutine = null;
-        attacking = false;
+        yield return null;
     }
+
+    attackCoroutine = null;
+    attacking = false;
+}
 
     protected virtual void OnTriggerStay2D(Collider2D collision)
     {
@@ -225,12 +251,21 @@ public class CharactorManager : MonoBehaviour
 
     public void HitDamage(float getDamege)
     {
-        
-        HPInstance.GetComponent<HPBarChenger>().GreenChenge( (myHP-getDamege) / sco.fullHP );
+        if (HPInstance == null) { Debug.Log("HPInstanceNull"); return; }
+        myHP -= getDamege;
+        myHP = Mathf.Max(myHP, 0);
+        HPBarChenger hPBar = HPInstance.GetComponent<HPBarChenger>();
+        float ratio = Mathf.Clamp01(myHP / sco.fullHP);
+        hPBar.GreenChenge(ratio);
+         if(myHP <= 0)
+        {
+            OnDestroy();
+        }
     }
     
     private void OnDestroy()
     {
+        StopAllCoroutines(); 
         Destroy(HPInstance);
         Destroy(gameObject);
     }

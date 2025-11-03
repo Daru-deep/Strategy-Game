@@ -18,11 +18,11 @@ MonoBehaviour:
   attackImage2: {fileID: 0}
   downImage: {fileID: 0}
   doFloat: 0
-  fullHP: 10
+  fullHP: 5
   walkSpeed: 2
   target: {fileID: 0}
   targetTagName: Enemy
   attackRange: 0
   attackSpeed: 1
-  attackPoint: 3
+  attackPoint: 1
   moveStopDistance: 0.1

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2820863986369955280}
   - component: {fileID: 4229622617397482463}
   - component: {fileID: 7920471676105678941}
-  - component: {fileID: 3850228628784147803}
   - component: {fileID: 2530967111746099973}
   - component: {fileID: 4676748037547282716}
   m_Layer: 0
@@ -106,28 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c33c108336bf1a41b3b93bce86f19e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AllyManager
-  attackPoint: 0
-  MoveSpeed: 0
-  attackInterval: 2
-  attackImage: {fileID: 0}
-  normalImage: {fileID: 0}
-  HPPrefab: {fileID: 3162205452962082115, guid: 6b639e77c3c85ca4b8c0a78732ca90c3, type: 3}
-  hpOffset: {x: -0.2, y: 0.5, z: 0}
+  HPPrefab: {fileID: 2837167930256123821, guid: 9df1680b435ceb1438712009580bc668, type: 3}
   sco: {fileID: 11400000, guid: 648c829b994f8c54b915868428bb3789, type: 2}
   damageTargetTag: PlayerBase
   attackRange: 0
---- !u!114 &3850228628784147803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105000411251968814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbbfe1c63041d94eb4006ae43d0f49b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HPManager
 --- !u!61 &2530967111746099973
 BoxCollider2D:
   m_ObjectHideFlags: 0

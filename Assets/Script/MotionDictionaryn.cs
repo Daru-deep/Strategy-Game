@@ -3,18 +3,13 @@ using UnityEngine;
 
 public class MotionDictionaryn : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   
 
-
-    void Start()
-    {
-
-    }
-
+    #region ==æµ®éŠãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³==
     public void FloatMotion(Vector3 startPos, GameObject target, float amplitude, float speed)
     {
 
-
+        if (target == null) return;
         if (startPos.y < amplitude)
         {
             float newY = startPos.y + Mathf.Sin(Time.time * speed) * amplitude;
@@ -25,29 +20,47 @@ public class MotionDictionaryn : MonoBehaviour
             target.transform.position = new Vector3(target.transform.position.x, startPos.y);
         }
     }
+    #endregion
+    //=========================================
 
+    //=========================================
+    #region ==ä¾µæ”»ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³==
     public void InvasionMotion(GameObject target, GameObject targetOb, float speed)
     {
+        if (target == null) return;
         Vector3 targetPos = new Vector3(targetOb.transform.position.x + 0.5f, targetOb.transform.position.y, targetOb.transform.position.z);
         target.transform.position = Vector3.MoveTowards(
-          target.transform.position,    // Œ»İˆÊ’u
-          targetPos,    // –Ú•WˆÊ’u
-          speed * Time.deltaTime        // –ˆƒtƒŒ[ƒ€i‚Ş‹——£
+          target.transform.position,    // ï¿½ï¿½ï¿½İˆÊ’u
+          targetPos,    // ï¿½Ú•Wï¿½Ê’u
+          speed * Time.deltaTime        // ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½iï¿½Ş‹ï¿½ï¿½ï¿½
       );
     }
+    #endregion
+    //==========================================
+
+    //================================================================
+    #region ==æ”»æ’ƒãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³==
     public void AttackMotion(GameObject target, float interval)
     {
+        if (target == null) return;
         StartCoroutine(Attacking(target, interval));
     }
 
+    
     IEnumerator Attacking(GameObject target, float interval)
     {
+        if (target == null) yield break;
         CharactorManager manager = target.GetComponent<CharactorManager>();
-        if (manager != null)
-        {
-            manager.ImageChenge(1); // UŒ‚’†‚ÌƒXƒvƒ‰ƒCƒg‚É•ÏX
-            yield return new WaitForSeconds(interval);
-            manager.ImageChenge(0); // ’ÊíƒXƒvƒ‰ƒCƒg‚É–ß‚·
-        }
+        if (manager == null) yield break;
+        if (manager == null || manager.gameObject == null) yield break; // ğŸ”¥ å®‰å…¨ãƒã‚§ãƒƒã‚¯
+
+            manager.ImageChenge(1);
+            yield return new WaitForSeconds(interval * 0.5f);
+
+            // æ”»æ’ƒé€”ä¸­ã§Destroyã•ã‚ŒãŸå ´åˆã®å®‰å…¨ç¢ºèª
+            if (manager == null || manager.gameObject == null) yield break;
+            manager.ImageChenge(0);
     }
+    #endregion
+    //================================================================
 }

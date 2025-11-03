@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   attackPoint: 10
   MoveSpeed: 5
-  attackInterval: 1
+  attackInterval: 0
   attackImage: {fileID: -1495148011298493057, guid: 90d46612dfdcac047a8d25f9eea6d245, type: 3}
   normalImage: {fileID: 1509115976647300443, guid: 198214d955fc0a9428e38a8062d6a449, type: 3}
   HPPrefab: {fileID: 2837167930256123821, guid: 9df1680b435ceb1438712009580bc668, type: 3}
