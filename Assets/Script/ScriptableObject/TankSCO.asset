@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c4627d698f3fba4c81ddfece5542ccd, type: 3}
-  m_Name: Saiber1St
+  m_Name: TankSCO
   m_EditorClassIdentifier: Assembly-CSharp::EnemySCO
-  charaname: Saber
-  normalImage: {fileID: -3349259736061779126, guid: 59855d5138f678a41a12266ab5f48ec4, type: 3}
-  attackImage: {fileID: 8490449775077930944, guid: f1b458a025de95c4e998fbf301acf408, type: 3}
+  charaname: 
+  normalImage: {fileID: 0}
+  attackImage: {fileID: 0}
   attackImage2: {fileID: 0}
   downImage: {fileID: 0}
   doFloat: 0
-  fullHP: 5
-  MPConsumption: 5
-  walkSpeed: 2
+  fullHP: 0
+  walkSpeed: 0
   target: {fileID: 0}
-  targetTagName: Enemy
+  targetTagName: 
   attackRange: 0
-  attackSpeed: 1
-  attackPoint: 1
-  moveStopDistance: 0.1
+  attackSpeed: 0
+  attackPoint: 0
+  moveStopDistance: 0

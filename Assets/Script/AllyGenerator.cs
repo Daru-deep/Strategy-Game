@@ -1,26 +1,43 @@
 using UnityEngine;
 
+[System.Serializable]
+public class AllyEntry
+{
+    public string allyname;
+    public GameObject prefab;
+}
+
+
 public class AllyGenerator : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] private GameObject saber;
-    [SerializeField] private Vector3 SpornPoint;
-    [SerializeField] private GameObject SpornOB;
+    [SerializeField] private AllyEntry[] allis;
+
+
+ 
+    [SerializeField] private Transform spawnPoint;
+
 
     [SerializeField] private GameManager gameManager;
 
-    private void AllyGenerat(GameObject chara)
+    public void SpornAlly(int index)
     {
-        SpornPoint = SpornOB.transform.position;
-        Instantiate(chara, SpornPoint, Quaternion.identity);
-        ConsumeMPpoints(saber.GetComponent<AllyManager>().GetConsumeMP());
-    }
-    public void SaberGenerat()
-    {
+        if (index >= allis.Length || index < 0)//不正なindexのチェック
+        {
+            Debug.LogError($"不正なindex:{index}");
+            return;
+        }
+
+        GameObject prefab = allis[index].prefab;
+        CharactorManager cm = prefab.GetComponent<CharactorManager>();
+        float cost = cm.GetConsumeMP();
+        ConsumeMPpoints(cost);
+
+         Instantiate(prefab, spawnPoint.position, Quaternion.identity);
         
-        AllyGenerat(saber);
+
     }
     
+
     private void ConsumeMPpoints(float Consume)
     {
         gameManager.UseMP(Consume);

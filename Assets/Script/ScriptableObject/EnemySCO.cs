@@ -13,7 +13,7 @@ public class EnemySCO : ScriptableObject
     public Sprite downImage;
     public bool doFloat;
     public float fullHP;
-
+    
     public float MPConsumption;
     public float walkSpeed;
     public GameObject target;

@@ -32,6 +32,10 @@ public class CharactorManager : MonoBehaviour
     [SerializeField] protected float attackRange = 0f; // 0なら距離チェックをしない
 
 
+    public float GetConsumeMP()
+    {
+        return sco.MPConsumption;
+    }
     private void PlayHPPrefab()
     {
         if (HPPrefab == null)
@@ -154,7 +158,7 @@ public class CharactorManager : MonoBehaviour
 
     SpriteRenderer imageRenderer = GetComponent<SpriteRenderer>();
     if (imageRenderer == null) return; 
-
+    
     // --- スプライト切替 ---
     if (imagenum == 0 && normalImage != null)
         imageRenderer.sprite = normalImage;
@@ -170,7 +174,7 @@ public class CharactorManager : MonoBehaviour
         if (obj == null) return false;
         string tagName = !string.IsNullOrEmpty(sco?.targetTagName)
             ? sco.targetTagName
-            : targetTag; // fallback
+            : targetTag; // こっちが正解
         return obj.CompareTag(tagName);
     }
 
@@ -180,6 +184,11 @@ public class CharactorManager : MonoBehaviour
         if (targetManager != null)
         {
             targetManager.HitDamage(attackPoint);
+        }
+        else
+        {
+            BaseManager bm = target.GetComponent<BaseManager>();
+            bm?.ChengeHP(-attackPoint);
         }
     }
 
@@ -263,8 +272,9 @@ public class CharactorManager : MonoBehaviour
         }
     }
     
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
+
         StopAllCoroutines(); 
         Destroy(HPInstance);
         Destroy(gameObject);

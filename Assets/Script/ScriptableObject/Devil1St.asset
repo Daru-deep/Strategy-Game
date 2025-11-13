@@ -19,10 +19,11 @@ MonoBehaviour:
   downImage: {fileID: 0}
   doFloat: 1
   fullHP: 10
+  MPConsumption: 0
   walkSpeed: 2
   target: {fileID: 0}
   targetTagName: Players
   attackRange: 0
   attackSpeed: 1
-  attackPoint: 1
+  attackPoint: 1.5
   moveStopDistance: 0

@@ -8,6 +8,7 @@ TagManager:
   - PlayerBase
   - HPBarCanvas
   - Players
+  - GameManager
   layers:
   - Default
   - TransparentFX
