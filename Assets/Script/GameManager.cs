@@ -22,15 +22,17 @@ public class GameManager : MonoBehaviour
     }
     
 
-    void UseAi(float use)
+    public void UseAi(float use)
     {
         float nowAiPoint = gaugeSCO.GetAiPoint();
         gaugeSCO.SetAiPoint(nowAiPoint -= use);
+        SynchronizationBar();
     }
-    void UseMP(float use)
+    public void UseMP(float use)
     {
         float nowMpPoint = gaugeSCO.GetMpPoint();
         gaugeSCO.SetMpPoint(nowMpPoint -= use);
+        SynchronizationBar();
     }
 
     

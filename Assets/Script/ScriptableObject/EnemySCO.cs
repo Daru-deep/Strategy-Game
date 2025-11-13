@@ -5,6 +5,7 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName = "Character")]
 public class EnemySCO : ScriptableObject
 {
+    [Header("Information")]
     public string charaname;
     public Sprite normalImage;
     public Sprite attackImage;
@@ -12,14 +13,15 @@ public class EnemySCO : ScriptableObject
     public Sprite downImage;
     public bool doFloat;
     public float fullHP;
-   
+
+    public float MPConsumption;
     public float walkSpeed;
     public GameObject target;
-    public string targetTagName;//ƒ^[ƒQƒbƒg‚Ìƒ^ƒO–¼
+    public string targetTagName;//ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½Ìƒ^ï¿½Oï¿½ï¿½
 
     [Header("Attack")]
-    public float attackRange;      // UŒ‚”ÍˆÍ
-    public float attackSpeed;   // UŒ‚ŠÔŠui•bj
+    public float attackRange;      // ï¿½Uï¿½ï¿½ï¿½Íˆï¿½
+    public float attackSpeed;   // ï¿½Uï¿½ï¿½ï¿½ÔŠuï¿½iï¿½bï¿½j
     public float attackPoint;
     public float moveStopDistance;
 }
