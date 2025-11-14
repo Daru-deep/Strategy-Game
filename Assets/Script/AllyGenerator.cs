@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class AllyEntry
@@ -12,14 +13,14 @@ public class AllyGenerator : MonoBehaviour
 {
     [SerializeField] private AllyEntry[] allis;
 
-
+    [SerializeField] private GaugeSCO gaugeSCO;
  
     [SerializeField] private Transform spawnPoint;
 
 
     [SerializeField] private GameManager gameManager;
 
-    public void SpornAlly(int index)
+    public void SpawanAlly(int index)
     {
         if (index >= allis.Length || index < 0)//不正なindexのチェック
         {
@@ -28,11 +29,22 @@ public class AllyGenerator : MonoBehaviour
         }
 
         GameObject prefab = allis[index].prefab;
-        CharactorManager cm = prefab.GetComponent<CharactorManager>();
-        float cost = cm.GetConsumeMP();
-        ConsumeMPpoints(cost);
+        Quaternion prefabQ = prefab.transform.rotation;//prefabのRoateを獲得
 
-         Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+        CharactorManager cm = prefab.GetComponent<CharactorManager>();
+        
+        float cost = cm.GetConsumeMP();
+
+        Debug.Log($"SpawnAlly: MP={gaugeSCO.GetMpPoint()}, Cost={cost}");
+
+
+        if(gaugeSCO.GetMpPoint() < cost)
+        {
+            Debug.Log($"<color = yellow>MPが足りません！！:必要MP{cost}</color>");
+            return;
+        }
+        ConsumeMPpoints(cost);
+        Instantiate(prefab, spawnPoint.position, prefabQ);
         
 
     }

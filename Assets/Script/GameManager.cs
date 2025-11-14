@@ -57,14 +57,10 @@ public class GameManager : MonoBehaviour
     public void UseMP(float use)
     {
         float nowMpPoint = gaugeSCO.GetMpPoint();
-        if(nowMpPoint > use)
-        {
+
         gaugeSCO.SetMpPoint(nowMpPoint -= use);
-        }
-        else
-        {
-            Debug.Log($"<color = yellow>MPが足りません！！:必要MP{use}</color>");
-        }
+        
+
         SynchronizationBar();
     }
 

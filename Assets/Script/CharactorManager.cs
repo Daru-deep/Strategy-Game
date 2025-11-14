@@ -65,7 +65,7 @@ public class CharactorManager : MonoBehaviour
                 attackImage = sco.attackImage;
                 normalImage = sco.normalImage;
                 attackPoint = sco.attackPoint;
-                attackInterval = sco.attackSpeed;
+                attackInterval = sco.attackInterval;
                 MoveSpeed = sco.walkSpeed;
             if (!string.IsNullOrEmpty(sco.targetTagName))
             {
@@ -169,7 +169,7 @@ public class CharactorManager : MonoBehaviour
     #region 攻撃処理
 
 
-    protected virtual bool IsValidTarget(GameObject obj)
+    protected virtual bool IsValidTarget(GameObject obj)//指定のタグ名か確認
     {
         if (obj == null) return false;
         string tagName = !string.IsNullOrEmpty(sco?.targetTagName)
@@ -196,7 +196,7 @@ public class CharactorManager : MonoBehaviour
     Coroutine attackCoroutine;  // 現在動いている攻撃コルーチンを保持
 
     protected IEnumerator AttackLoop()
-{
+    {
     attacking = true;
 
     while (attacking && toAttack != null)

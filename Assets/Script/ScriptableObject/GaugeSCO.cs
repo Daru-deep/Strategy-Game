@@ -6,6 +6,8 @@ public class GaugeSCO : ScriptableObject
     [SerializeField]private float aiPoint = 0;
     [SerializeField]private float mpPoint = 50;
 
+    
+
     public void SetAiPoint(float setnum)
     {
         aiPoint = setnum;

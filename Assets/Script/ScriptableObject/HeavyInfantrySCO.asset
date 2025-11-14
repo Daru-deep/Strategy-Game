@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c4627d698f3fba4c81ddfece5542ccd, type: 3}
-  m_Name: TankSCO
+  m_Name: HeavyInfantrySCO
   m_EditorClassIdentifier: Assembly-CSharp::EnemySCO
-  charaname: 
-  normalImage: {fileID: 0}
-  attackImage: {fileID: 0}
+  charaname: HeavyInfantry
+  normalImage: {fileID: 4326872430171513394, guid: 0397efe8cca75fa4c83deaa5995de36b, type: 3}
+  attackImage: {fileID: -1577362013611696668, guid: cde91aa68827ab54b89ee018317d74c8, type: 3}
   attackImage2: {fileID: 0}
   downImage: {fileID: 0}
   doFloat: 0
-  fullHP: 0
-  walkSpeed: 0
+  fullHP: 10
+  MPConsumption: 30
+  walkSpeed: 1
   target: {fileID: 0}
-  targetTagName: 
-  attackRange: 0
-  attackSpeed: 0
-  attackPoint: 0
-  moveStopDistance: 0
+  targetTagName: Enemy
+  attackRange: 1
+  attackInterval: 3
+  attackPoint: 3
+  moveStopDistance: 0.5

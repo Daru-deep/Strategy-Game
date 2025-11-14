@@ -12,27 +12,49 @@ public class EnemyGenarator : MonoBehaviour
     private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] public Vector3 instancePos;
     
-    private void Start()
+    public void CallCoroutine(string index,int count)
     {
-        StartCoroutine(Generator());
+        StartCoroutine(Generator(index,count));
     }
 
-    IEnumerator Generator()
+    IEnumerator Generator(string index,int count)//ここで、カウント分敵を生産
     {
 
-        while (start)
-        {
+            for(int i=0;i>count;i++)
+            {
+            
             yield return new WaitForSeconds(generateInterval);
-            int rand =  Random.Range(0,enemyPrefab.Length);
-            GameObject newEnemy = Instantiate(enemyPrefab[rand],instancePos, Quaternion.identity);
+            GameObject newEnemy = Instantiate(enemyPrefab[IDtoIndex(index)],instancePos, Quaternion.identity);
             
             enemies.Add(newEnemy);
-        }
+            }
     }
+
+    private int IDtoIndex(string index)//あとで、CSVのIDをIndexにすることで対応し、削除
+    {
+
+        
+        if(index == "devil")
+        {    
+            return 0;
+        }
+        else if(index == "heavy")
+        {
+            return 1;   
+        }
+        else
+        {
+            return 0;
+        }
+        
+
+    }
+        
 
     public GameObject GetGameObject(int getnum)
     {
         return enemies[getnum];
+        
     }
 
 

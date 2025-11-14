@@ -21,7 +21,7 @@ public class EnemySCO : ScriptableObject
 
     [Header("Attack")]
     public float attackRange;      // �U���͈�
-    public float attackSpeed;   // �U���Ԋu�i�b�j
+    public float attackInterval;   // �U���Ԋu�i�b�j
     public float attackPoint;
     public float moveStopDistance;
 }

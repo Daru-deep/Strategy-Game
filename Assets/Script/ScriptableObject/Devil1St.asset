@@ -24,6 +24,6 @@ MonoBehaviour:
   target: {fileID: 0}
   targetTagName: Players
   attackRange: 0
-  attackSpeed: 1
+  attackInterval: 2
   attackPoint: 1.5
   moveStopDistance: 0
